@@ -8,9 +8,44 @@
     <style>
         body
         {
-            color:white;
-            background-image:url('http://img3.imgtn.bdimg.com/it/u=3280109295,2793291172&fm=27&gp=0.jpg');
-            background-color:#cccccc;
+            background-size:cover;
+            background-image:url('../web2/timg.jpg');
+            background-repeat: no-repeat;
+            background-attachment:fixed;
+        }
+        #app1
+        {
+            text-align:center;
+            font-family: 楷体;
+            font-size: 50px;
+        }
+        #app2
+        {
+            margin: auto;
+            color: sienna;
+            padding-top:10px;
+            padding-bottom:15px;
+            padding-right:15px;
+            padding-left:5px;
+            width: 35%;
+            font-family: 微软雅黑;
+            font-size: 17px;
+        }
+        #app3
+        {
+            text-align:center;
+            font-family: 微软雅黑;
+            font-size: 20px;
+        }
+        #app4
+        {
+            text-align:center;
+            font-family: 微软雅黑;
+            font-size: 20px;
+        }
+        #app5
+        {
+            color: white;
         }
     </style>
 
@@ -26,28 +61,38 @@
     <ul>
         <li v-for="todo in todos">
             {{ todo.text }}
+            <p></p>
         </li>
     </ul>
-</div>
-
-    <div id="app3">
-
-        <span>写下你想说的话:</span>
-        <p style="white-space: pre-line;">{{ message }}</p>
-        <br>
-        <textarea v-model="message" placeholder="^_^"></textarea>
-
-        <button v-on:click="fx">发表</button>
-
-    <p>counter： {{ counter }} .</p>
+    <span style="color: black;margin: 200px 0px 100px 160px">写下你想说的话吧:</span>
+    <p style="white-space: pre-line;"></p>
+    <br>
+    <textarea v-model="message2" placeholder="请输入昵称" style="width: 150px; height:20px;margin: 0px 0px 0px 60px"></textarea>
+    <textarea v-model="message1" placeholder="请输入内容" style="width: 350px; height:80px;margin: 0px 0px 0px 60px"></textarea>
+    <p></p>
+    <button v-on:click="fx" style="width: 50px; height:30px;margin: 0px 0px 0px 370px">发表</button>
 </div>
 
 
-<script>
+
+<div id="app4">
+    <my-component></my-component>
+</div>
+
+    <script>
+
+    Vue.component('my-component', {
+        template: '<div>Practice</div>'
+    })
+    // 创建根实例
+    new Vue({
+        el: '#app4'
+    })
+
     new Vue({
         el:'#app1',
         data: {
-            message:'古诗'
+            message:'欲说还休'
         }
     });
 
@@ -55,30 +100,36 @@
         el: '#app2',
         data: {
             todos: [
-                { text: 'text1' },
-                { text: 'text2' },
-                { text: 'text3' }
-            ]
-        }
-    })
-
-    var app3 = new Vue({
-        el: '#app3',
-        data: {
-            message:'',
-            name: 'Vue.js',
-            counter: 0
+                { text: 'Nameless:'},
+                { text: '出国考试。一度迷茫自己为什么会选这一条最不安稳的路，也想过干脆工作算了。但是到最后还是心里的那么一点不甘和憧憬在作祟吧。未来也不知道怎么样，眼下这关都还没迈过去呢。没啥励志的结束语，就这样了。' },
+                { text: '——Nov 23 2016 16:12:05'},
+                { text: 'Somebody:'},
+                { text: '我活不了多久了，随时可能离去。可是我今年才刚满20岁，我还有好多事没去做，还有好多的梦想。我不知道该怎么办，现在的生活一团糟。我想好好努力学习，可是努力了又能怎样？一个连未来都没有的人……' },
+                { text: '——Feb 15 2017 23:33:23'},
+                { text: '>_<:'},
+                { text: '想通了一件事：所谓活着，不是为了变得与众不同万里挑一，而是看看能成为怎样的自己。天地烘炉，炼己炼性。' },
+                { text: '——Nov 11 2017 20:06:32'}
+            ],
+            message1:'',
+            message2:'',
         },
-        // 在 `methods` 对象中定义方法
         methods: {
             fx: function (event) {
-                // `this` 在方法里指当前 Vue 实例
-                alert('Hello ' + this.name + '!')
-                // `event` 是原生 DOM 事件
-                if (event) {
-                    alert(event.target.tagName)
+                if (this.message1=='') {
+                    alert('请输入内容！')
+                    return
                 }
-                this.counter+=1
+                var tempName=this.message2+':'
+                if (this.message2=='')
+                    tempName='Nameless:'
+                var d=new Date()
+                d+=''
+                d=d.substr(3,20)
+                d='——'+d
+                this.todos.push({text: tempName})
+                this.todos.push({text: this.message1})
+                this.todos.push({text: d})
+                this.message1=''
             }
         }
     })
