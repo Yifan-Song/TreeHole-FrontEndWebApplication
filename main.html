@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TreeHole</title>
+    <script src="https://unpkg.com/vue"></script>
+
+    <style>
+        body
+        {
+            color:white;
+            background-image:url('http://img3.imgtn.bdimg.com/it/u=3280109295,2793291172&fm=27&gp=0.jpg');
+            background-color:#cccccc;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div id="app1">
+    {{ message }}
+</div>
+
+<div id="app2">
+    <ul>
+        <li v-for="todo in todos">
+            {{ todo.text }}
+        </li>
+    </ul>
+</div>
+
+    <div id="app3">
+
+        <span>写下你想说的话:</span>
+        <p style="white-space: pre-line;">{{ message }}</p>
+        <br>
+        <textarea v-model="message" placeholder="^_^"></textarea>
+
+        <button v-on:click="fx">发表</button>
+
+    <p>counter： {{ counter }} .</p>
+</div>
+
+
+<script>
+    new Vue({
+        el:'#app1',
+        data: {
+            message:'古诗'
+        }
+    });
+
+    new Vue({
+        el: '#app2',
+        data: {
+            todos: [
+                { text: 'text1' },
+                { text: 'text2' },
+                { text: 'text3' }
+            ]
+        }
+    })
+
+    var app3 = new Vue({
+        el: '#app3',
+        data: {
+            message:'',
+            name: 'Vue.js',
+            counter: 0
+        },
+        // 在 `methods` 对象中定义方法
+        methods: {
+            fx: function (event) {
+                // `this` 在方法里指当前 Vue 实例
+                alert('Hello ' + this.name + '!')
+                // `event` 是原生 DOM 事件
+                if (event) {
+                    alert(event.target.tagName)
+                }
+                this.counter+=1
+            }
+        }
+    })
+
+</script>
+
+</body>
+</html>
