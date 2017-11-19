@@ -4,49 +4,9 @@
     <meta charset="UTF-8">
     <title>TreeHole</title>
     <script src="https://unpkg.com/vue"></script>
-
-    <style>
-        body
-        {
-            background-size:cover;
-            background-image:url('../web2/timg.jpg');
-            background-repeat: no-repeat;
-            background-attachment:fixed;
-        }
-        #app1
-        {
-            text-align:center;
-            font-family: 楷体;
-            font-size: 50px;
-        }
-        #app2
-        {
-            margin: auto;
-            color: sienna;
-            padding-top:10px;
-            padding-bottom:15px;
-            padding-right:15px;
-            padding-left:5px;
-            width: 35%;
-            font-family: 微软雅黑;
-            font-size: 17px;
-        }
-        #app3
-        {
-            text-align:center;
-            font-family: 微软雅黑;
-            font-size: 20px;
-        }
-        #app4
-        {
-            text-align:center;
-            font-family: 微软雅黑;
-            font-size: 20px;
-        }
-        #app5
-        {
-            color: white;
-        }
+    <link rel="stylesheet" type="text/css" href="../web2/css/buttons.css"/>;
+    <style type="text/css">
+        @import url("main css.css");
     </style>
 
 </head>
@@ -54,7 +14,6 @@
 <body>
 
 <div id="app1">
-    <br>
     {{ message }}
     <br>
 </div>
@@ -64,87 +23,37 @@
         <li v-for="todo in todos">
             {{ todo.text }}
             <br>
-            <counter1></counter1>
+            <counter1></counter1>&nbsp;&nbsp;&nbsp;
             <counter2></counter2>
-            <p></p>
+            <br><br>
         </li>
     </ul>
-    <br><br>
-    <span style="color: black;margin: 0px 0px 0px 160px">写下你想说的话吧:</span>
     <p style="white-space: pre-line;"></p>
     <br>
-    <textarea v-model="message2" placeholder="请输入昵称" style="width: 150px; height:20px;margin: 0px 0px 0px 60px"></textarea>
-    <textarea v-model="message1" placeholder="请输入内容" style="width: 350px; height:80px;margin: 0px 0px 0px 60px"></textarea>
-    <p></p>
-    <button v-on:click="fx" style="width: 50px; height:30px;margin: 0px 0px 0px 370px">发表</button>
+    <label class="field field_type2">
+        <input class="field__input" placeholder="默认为Nameless" v-model="message2" style="width: 200px;height: 30px;margin: 0px 0px 0px 10px">
+        <span class="field__label">你的名字？</span>
+        <span class="field__line"></span>
+    </label>
+    <br><br>
+    <label class="field field_type1">
+        <input class="field__input" placeholder="hi~" v-model="message1"style="width: 470px;height: 100px;margin: 0px 0px 0px 10px">
+        <span class="field__label">写下你想说的话吧：</span>
+    </label>
+    <br>
+    <button v-on:click="fx" style="width: 50px; height:30px;margin: 0px 0px 0px 430px;" >发表</button>
 </div>
 
-    <script>
-
-        Vue.component('counter1', {
-            template: '<button v-on:click="counter += 1"style="width: 40px; height:25px">赞:{{ counter }}</button>',
-            data: function () {
-                return {counter: 0}
-            }
-        })
-
-        Vue.component('counter2', {
-            template: '<button v-on:click="counter += 1"style="width: 40px; height:25px">踩:{{ counter }}</button>',
-            data: function () {
-                return {counter: 0}
-            }
-        })
-
-    new Vue({
-        el:'#app1',
-        data: {
-            message:'欲说还休'
-        }
-    });
-
-    new Vue({
-        el: '#app2',
-        data: {
-            todos: [
-                { text: 'Nameless:要出国考试了。一度迷茫自己为什么会选这一条最不安稳的路，也想过干脆工作算了。但是到最后还是心里的那么一点不甘和憧憬在作祟吧。未来也不知道怎么样，眼下这关都还没迈过去呢。没啥励志的结束语，就这样了。——Nov 23 2016 16:12:05' },
-                { text: 'Somebody:我活不了多久了，随时可能离去。可是我今年才刚满20岁，我还有好多事没去做，还有好多的梦想。我不知道该怎么办，现在的生活一团糟。我想好好努力学习，可是努力了又能怎样？一个连未来都没有的人……——Feb 15 2017 23:33:23' },
-                { text: '>_<:想通了一件事：所谓活着，不是为了变得与众不同万里挑一，而是看看能成为怎样的自己。天地烘炉，炼己炼性。——Nov 11 2017 20:06:32' }
-            ],
-            message1:'',
-            message2:'',
-            counter1:0,
-            counter2:0,
-            list:[
-                0
-            ]
-        },
-        methods: {
-            buttonf1:function (event) {
-                this.counter1+=1
-            },
-            buttonf2:function (event) {
-                this.counter2+=1
-            },
-            fx: function (event) {
-                if (this.message1=='') {
-                    alert('请输入内容！')
-                    return
-                }
-                var tempName=this.message2+':'
-                if (this.message2=='')
-                    tempName='Nameless:'
-                var d=new Date()
-                d+=''
-                d=d.substr(3,20)
-                d='——'+d
-                var tempElement=tempName+this.message1+d
-                this.todos.push({text: tempElement})
-                this.message1=''
-            }
-        }
-    })
-
-</script>
+<div id="app3">
+    <br>
+    <p>参考网址：</p>
+    <a href="http://www.6our.com/">树洞网</a>&nbsp;<a href="http://app.xinli001.com/hole/">壹心理</a>
+    <br>
+</div>
 
 </body>
+
+<script type="text/javascript" src="main js.js">
+</script>
+
 </html>
